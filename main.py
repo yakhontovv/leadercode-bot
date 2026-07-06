@@ -567,12 +567,6 @@ async def finish(cb: CallbackQuery, st):
                 f"Разбор:\n<pre>{bars(s, lang)}</pre>")
         except Exception as e:
             log.error("lead completion to group: %s", e)
-    if ADMIN:
-        try:
-            await bot.send_message(ADMIN, f"PAEI результат: {escape(cb.from_user.full_name)} "
-                                          f"(@{cb.from_user.username}) · {prof} · subject={subject} · src={source} · {lang}")
-        except Exception:
-            pass
 
 # ---------- Хендлеры ----------
 def lang_kb():
@@ -604,12 +598,6 @@ async def start(m: Message):
         urow = c.execute("SELECT starts, invited_by FROM users WHERE tg_id=?", (m.from_user.id,)).fetchone()
     n_starts = urow["starts"] if urow else 1
     is_top = bool(urow["invited_by"]) if urow else False
-    if ADMIN:
-        try:
-            await bot.send_message(ADMIN, f"PAEI /start: {escape(m.from_user.full_name)} "
-                                          f"(@{m.from_user.username}) · src={payload or 'direct'}")
-        except Exception:
-            pass
     # заход -> в группу лидов (топов по inv_ не шлём: это чей-то член команды)
     if LEADS_TARGET and not is_top:
         try:
