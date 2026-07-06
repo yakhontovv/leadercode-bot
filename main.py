@@ -367,11 +367,13 @@ def init_db():
         CREATE TABLE IF NOT EXISTS invites(
             owner_id INTEGER PRIMARY KEY, issued_at TEXT, reminded INT DEFAULT 0);
         """)
-        # миграция: язык пользователя
-        try:
-            c.execute("ALTER TABLE users ADD COLUMN lang TEXT")
-        except sqlite3.OperationalError:
-            pass  # колонка уже есть
+        # миграции
+        for col, ddl in (("lang", "ALTER TABLE users ADD COLUMN lang TEXT"),
+                         ("starts", "ALTER TABLE users ADD COLUMN starts INTEGER DEFAULT 0")):
+            try:
+                c.execute(ddl)
+            except sqlite3.OperationalError:
+                pass  # колонка уже есть
 
 def upsert_user(m: Message, source, invited_by=None):
     is_new = False
@@ -543,6 +545,7 @@ async def finish(cb: CallbackQuery, st):
         await cb.message.answer(T(lang)["atlas_note"])
     with db() as c:
         u = c.execute("SELECT invited_by FROM users WHERE tg_id=?", (uid,)).fetchone()
+    is_top = bool(u["invited_by"]) if u else False
     if u and u["invited_by"] and subject == "self" and u["invited_by"] != uid:
         try:
             olang = get_lang(u["invited_by"])
@@ -550,6 +553,20 @@ async def finish(cb: CallbackQuery, st):
                 T(olang)["owner_notif"].format(name=escape(cb.from_user.full_name), prof=prof))
         except Exception:
             pass
+    # прошёл день -> в группу лидов (только холодные self, топов прячем; proxy не шлём)
+    if LEADS_TARGET and subject == "self" and not is_top:
+        try:
+            uname = cb.from_user.username
+            handle = f"@{uname}" if uname else "без username"
+            names = " + ".join(T(lang)["names"][c] for c in dom)
+            await bot.send_message(LEADS_TARGET,
+                f"🟢 Прошёл «Код руководителя»\n"
+                f"Кто: {escape(cb.from_user.full_name)} ({handle})\n"
+                f"Код: {prof} - {names}\n"
+                f"Источник: {source} · язык: {lang}\n"
+                f"Разбор:\n<pre>{bars(s, lang)}</pre>")
+        except Exception as e:
+            log.error("lead completion to group: %s", e)
     if ADMIN:
         try:
             await bot.send_message(ADMIN, f"PAEI результат: {escape(cb.from_user.full_name)} "
@@ -580,24 +597,32 @@ async def start(m: Message):
                 r = c.execute("SELECT name FROM users WHERE tg_id=?", (invited_by,)).fetchone()
             inviter_name = r["name"] if r else "коллега"
             source = "inv"
-    is_new = upsert_user(m, source, invited_by)
+    upsert_user(m, source, invited_by)
+    # счётчик заходов + признак приглашённого топа
+    with db() as c:
+        c.execute("UPDATE users SET starts = COALESCE(starts,0)+1 WHERE tg_id=?", (m.from_user.id,))
+        urow = c.execute("SELECT starts, invited_by FROM users WHERE tg_id=?", (m.from_user.id,)).fetchone()
+    n_starts = urow["starts"] if urow else 1
+    is_top = bool(urow["invited_by"]) if urow else False
     if ADMIN:
         try:
             await bot.send_message(ADMIN, f"PAEI /start: {escape(m.from_user.full_name)} "
                                           f"(@{m.from_user.username}) · src={payload or 'direct'}")
         except Exception:
             pass
-    # новый холодный лид -> в группу лидов (топов по inv_ не шлём: это чей-то член команды)
-    if is_new and not payload.startswith("inv_") and LEADS_TARGET:
+    # заход -> в группу лидов (топов по inv_ не шлём: это чей-то член команды)
+    if LEADS_TARGET and not is_top:
         try:
             uname = m.from_user.username
             handle = f"@{uname}" if uname else "без username"
             gsrc = payload if payload in ("atlas", "site", "ads") else "direct"
+            head = "Новый лид зашёл" if n_starts == 1 else "Повторный заход"
             await bot.send_message(LEADS_TARGET,
-                f"Новый лид в «Код руководителя»: {escape(m.from_user.full_name)} "
-                f"({handle}) · источник: {gsrc}")
+                f"🟡 {head} в «Код руководителя»\n"
+                f"Кто: {escape(m.from_user.full_name)} ({handle})\n"
+                f"Источник: {gsrc} · заход №{n_starts}")
         except Exception as e:
-            log.error("new lead to group: %s", e)
+            log.error("lead entry to group: %s", e)
     if m.from_user.id in ST and ST[m.from_user.id].get("mode") == "quiz":
         st = ST[m.from_user.id]
         lang = st["lang"]
@@ -740,9 +765,10 @@ async def review(cb: CallbackQuery):
     src = user_source(uid)
     uname = cb.from_user.username
     handle = f"@{uname}" if uname else "без username"
-    lead = (f"Заявка на разбор карты команды\n"
-            f"От: {escape(cb.from_user.full_name)} ({handle})\n"
-            f"Код: {prof} · источник: {src} · язык: {lang}\n"
+    lead = (f"🔴 Запросил разбор карты команды\n"
+            f"Кто: {escape(cb.from_user.full_name)} ({handle})\n"
+            f"Код: {prof}\n"
+            f"Источник: {src} · язык: {lang}\n"
             f"Написать: <a href=\"tg://user?id={uid}\">открыть чат</a>")
     sent = False
     if LEADS_TARGET:
