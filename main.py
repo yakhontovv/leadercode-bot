@@ -94,22 +94,22 @@ SCENES_RU = [
 
 SCENES_EN = [
     ("9:00", "You're at the office. Your first meeting is at 11:00 - you've got a two-hour window. What do you actually do?",
-     {"P": "“Get to work - clear the most urgent things while it's quiet”",
-      "A": "“Go through the numbers - close loose ends, plan the week”",
+     {"P": "“Get to work - knock out the most urgent stuff while it's quiet”",
+      "A": "“Go through the numbers - tie up loose ends, plan the week”",
       "E": "“Think through the idea I can't let go of”",
       "I": "“Walk the floor - talk to people, hear how the team is doing”"}, False),
     ("10:40", "Message in the team chat: they've blown a major deadline. Gut reaction - be honest:",
      {"P": "“Hand it over, I'll finish it myself. Faster than explaining”",
-      "A": "“How are we only hearing about this on the last day?”",
+      "A": "“Why are we only hearing about this on the last day?”",
       "E": "“Hold on - do we even still need this deadline?”",
-      "I": "“Let's sit down and figure out where we broke down”"}, True),
+      "I": "“Let's sit down and work out what broke down between us”"}, True),
     ("11:30", "Team meeting. Your two strongest people are going at each other - voices raised.",
      {"P": "“Time's up. I'll make the call - everyone back to work”",
       "A": "“Stick to the facts: whose responsibility is this?”",
-      "E": "“Both solutions are yesterday's. Let's rethink the task itself”",
+      "E": "“Both solutions are yesterday's thinking. Let's rethink the problem itself”",
       "I": "“This isn't about the task - something's off between you two. Let's talk about that”"}, True),
     ("13:30", "Lunch with a partner. He pitches a big but half-baked project.",
-     {"P": "“If I can see the path to money, I'm in”",
+     {"P": "“If I can see the path to the money, I'm in”",
       "A": "“Numbers first: risks, resources, a plan - then we talk”",
       "E": "“Half-baked means no rules yet. Now I'm interested”",
       "I": "“Depends who's doing it. With the right people - yes”"}, False),
@@ -121,14 +121,14 @@ SCENES_EN = [
     ("17:30", "It hits you: your workload has doubled and you're not keeping up. How do you cope - honestly?",
      {"P": "“Push harder myself - and cut everything non-essential”",
       "A": "“Build structure: roles, processes, reporting”",
-      "E": "“Break the whole working model - this can't go on”",
+      "E": "“Blow up the whole operating model - this can't go on”",
       "I": "“Start trusting the team - hand over what I've been holding onto”"}, True),
-    ("19:00", "Tomorrow you fly out for a week, mostly off the grid. Which thought catches up with you?",
+    ("19:00", "Tomorrow you fly out for a week, mostly off the grid. Which thought nags at you?",
      {"P": "“Key deals will stall - who'll push them over the line?”",
       "A": "“Just don't let them mess up the money or the deadlines”",
       "E": "“A week lost - my ideas will just sit there. Again”",
       "I": "“How will they get along without me - will it blow up?”"}, False),
-    ("21:30", "That evening, you tell someone close about your day. What do you bring up - with a smile?",
+    ("21:30", "That evening, you tell someone close to you about your day. What do you bring up - with a smile?",
      {"P": "“Pulled off the thing nobody believed in”",
       "A": "“The day ran like clockwork - not a single fire”",
       "E": "“Came up with a play - we're trying it tomorrow”",
@@ -242,44 +242,44 @@ TXT = {
         "manage": {
             "P": "The results engine. You're wherever things need pushing over the line: the deal, the product, the crisis. Your team trusts you because you answer with action.",
             "A": "The keeper of order. Numbers, processes, risks - with you, the business runs predictably, no fires. “How do we do this right?” - that question comes to you.",
-            "E": "The future generator. You see what doesn't exist yet and fire people up with launch energy. You change the rules of the game instead of playing by someone else's.",
-            "I": "The team builder. You read people, defuse conflicts before they blow up, and people want to work around you. Trust is your currency.",
+            "E": "The future-maker. You see what doesn't exist yet and get people fired up to chase it. You change the rules of the game instead of playing by someone else's.",
+            "I": "The team builder. You read people, defuse conflicts before they blow up, and people want to be on your team. Trust is your currency.",
         },
         "lowtxt": {
-            "P": "Follow-through: decisions hang unfinished. Cover the Producer (P) code - grow the person who gets things to money, or find one.",
-            "A": "Systems: growth runs on heroics, not process. Cover the Administrator (A) code - grow your person of order, or find one.",
-            "E": "The new: the business coasts on momentum and breakthroughs keep sliding. Add E carefully - as a partner or advisor, not a hired executive.",
+            "P": "Follow-through: decisions hang unfinished. Cover the Producer (P) code - grow the person who drives things to revenue, or find one.",
+            "A": "Systems: growth runs on heroics, not process. Cover the Administrator (A) code - grow your systems person, or find one.",
+            "E": "Innovation: the business coasts on momentum and the next breakthrough keeps slipping. Add E carefully - as a partner or advisor, not a hired executive.",
             "I": "People: the team is a set of doers, not an organism. Cover the Integrator (I) code - grow the one who already holds the relationships, or find one.",
         },
         "instr": {
-            "P": "Bring me solutions, not problems. Short and to the point. If you promised - deliver. Want to convince me? Show results, not slides.",
-            "A": "Facts and numbers first, conclusions after. Warn me early, not on the last day. Changing the rules? Tell me why.",
-            "E": "Bring ideas raw - we'll shape them together. Don't kill a proposal with “unrealistic”. Nudge me about deadlines - I get carried away.",
+            "P": "Bring me solutions, not problems. Short and to the point. You promised? Then deliver. Want to convince me? Show results, not slides.",
+            "A": "Facts and numbers first, conclusions second. Warn me early, not on the last day. Changing the rules? Tell me why.",
+            "E": "Bring ideas raw - we'll shape them together. Don't kill an idea with “that'll never work”. Nudge me about deadlines - I get carried away.",
             "I": "Talk straight - I can take it, and I'll hear you. Don't play politics; it's the one thing that kills my trust. If you're struggling, say so before you burn out.",
         },
         "forecast": {
             "A": "Chaos grows: money starts leaking through processes that don't exist. First symptom - nobody can name your actual margin.",
-            "P": "Decisions get made - and never reach results. First symptom - the strategy keeps updating, revenue doesn't.",
+            "P": "Decisions get made - and never turn into results. First symptom - the strategy keeps updating, revenue doesn't.",
             "E": "The business hits the ceiling of its current model. First symptom - you're growing slower than the market.",
             "I": "The team starts quietly drifting away. First symptom - your best people leave “for no reason”.",
         },
-        "legend": "Capital letter - strong code · lowercase - middle · “-” - a gap",
+        "legend": "Capital = strong code · lowercase = moderate · “-” = a gap",
         "disc_soft": "Your code is a style, not a measure of ability.",
         "disc_full": "The code describes management style, not ability. Not a basis for HR decisions.",
         "not_ceiling": "Your code is today's style, not a ceiling - styles shift as your context shifts.",
         "sign": "Based on Ichak Adizes' model · YES•GROUP",
-        "intro_own": ("<b>Leader Code</b> - a short simulation by YES•GROUP.\n\n"
-                      "In 3 minutes you'll live through one working day: 8 everyday situations. "
-                      "In each, pick what you'd actually do, not what's “correct”.\n\n"
-                      "From your answers the bot builds your management code (Ichak Adizes' model) - "
+        "intro_own": ("<b>Leader Code</b> - a 3-minute simulation game from YES•GROUP.\n\n"
+                      "You'll live through one workday: 8 everyday situations. "
+                      "For each, pick what you'd actually do - not the ‘right’ answer.\n\n"
+                      "From your answers, the bot maps your management code (based on Ichak Adizes' model) - "
                       "where you're strong and who your team is missing. There are no bad codes: "
-                      "everyone is strong in 1-2 of the four.\n\nReady? The day starts at 9:00."),
-        "intro_inv": ("<b>Leader Code</b> - a short simulation by YES•GROUP.\n\n"
+                      "everyone's strong in one or two of the four.\n\nReady? The day starts at 9:00."),
+        "intro_inv": ("<b>Leader Code</b> - a 3-minute simulation game from YES•GROUP.\n\n"
                       "<b>{name}</b> invited you to map your management code. Only you and {name} "
                       "will see the result - no one else. This isn't a performance review: there are "
-                      "no bad codes, and strong teams are made of different ones.\n\n"
-                      "In 3 minutes you'll live through one working day: 8 situations. In each, pick "
-                      "what you'd actually do, not what's “correct”.\n\nReady? The day starts at 9:00."),
+                      "no bad codes, and the strongest teams are built from different ones.\n\n"
+                      "You'll live through one workday: 8 situations. For each, pick "
+                      "what you'd actually do - not the ‘right’ answer.\n\nReady? The day starts at 9:00."),
         "start_btn": "Start the day - 9:00",
         "counter": "scene {n} of 8",
         "q_most": "Your move:",
@@ -287,16 +287,16 @@ TXT = {
         "q_proxy_most": "What would {name} do?",
         "q_proxy_least": "And what would {name} never do?",
         "back": "← Back",
-        "flat": ("<b>A flat profile</b>\n\nA flat profile almost never happens to a real leader. "
+        "flat": ("<b>A flat profile</b>\n\nA flat profile is almost unheard of in a real leader. "
                  "It usually means you answered the “right” way, not the real way. "
                  "Run the day again - remembering how it actually went: /start\n\n{sign}"),
-        "res_head_self": "Your code from one day - preliminary",
-        "res_head_proxy": "Code for {name} (outside view)",
+        "res_head_self": "Your one-day code - a first read",
+        "res_head_proxy": "{name}'s code (an outside view)",
         "pair_note": "The codes run neck and neck - both are yours; the order may shift from day to day.",
         "h_manage": "How you lead",
-        "h_sags": "What's sagging and who to bring in",
+        "h_sags": "Where you're thin - and who to bring in",
         "h_instr": "Working with me - forward this to your team",
-        "h_forecast": "For leaders with this profile, here's what usually breaks at 2x growth",
+        "h_forecast": "For leaders with this profile, here's what usually breaks first at 2x growth",
         "forecast_anchor": "From 497 projects at YES•GROUP",
         "btn_invite": "See your team's codes",
         "btn_proxy": "Take it for a team member",
@@ -308,12 +308,12 @@ TXT = {
                        "I'll send the step-by-step review together with the map."),
         "owner_notif": "A code was added to your map: <b>{name}</b> - <b>{prof}</b>.\nMap: /team",
         "invite_wrapper": "<b>Forward</b> the message below to your key people (3-5):",
-        "invite_fwd": ("I just took Leader Code - in 3 minutes you live through one working day and see "
-                       "your management code: where you're strong and a “working with me” memo. "
-                       "Take it too, it's 3 minutes: {link}"),
+        "invite_fwd": ("I just took Leader Code - in 3 minutes you live through one workday and get "
+                       "your management code: where you're strong, plus a “working with me” memo. "
+                       "Take it too: {link}"),
         "invite_after": ("Everyone who takes it shows up on your map automatically - I'll ping you. Map: /team"),
         "proxy_ask": ("Who are you taking it for? Name and role - e.g. “Maria, head of sales”.\n\n"
-                      "Answer honestly - as they would act, not as you'd like them to. "
+                      "Answer honestly - as they'd actually act, not as you'd like them to. "
                       "The map will show it as an outside view."),
         "proxy_confirm": "Taking it for <b>{name}</b>. The same day, 8 scenes - as they would act.",
         "resume_prompt": "You have an unfinished day - scene {n} of 8. Pick up where you left off?",
@@ -327,10 +327,10 @@ TXT = {
         "team_side": "(outside view)",
         "team_closed": "Covered by the team: <b>{codes}</b>",
         "team_only_you": ("Covered only by you: <b>{codes}</b> - without you, the team doesn't hold these codes. "
-                          "That's exactly where the business still stands on you."),
+                          "That's exactly where the business still rests on you."),
         "team_open": "Not covered by anyone: <b>{codes}</b>",
         "team_note": ("The map shows people's preferences, not their worth. A gap in a code is a hiring or "
-                      "growth task - not a verdict on the team."),
+                      "development question - not a verdict on the team."),
         "team_multi": "Several businesses? This version maps one core team.",
         "team_atlas": "Bring the map to meeting 6 (July 13) + one decision on one gap.",
         "team_empty": "Your map is empty. Take the day yourself first: /start",
