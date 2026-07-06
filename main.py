@@ -374,9 +374,11 @@ def init_db():
             pass  # колонка уже есть
 
 def upsert_user(m: Message, source, invited_by=None):
+    is_new = False
     with db() as c:
         row = c.execute("SELECT tg_id FROM users WHERE tg_id=?", (m.from_user.id,)).fetchone()
         if row is None:
+            is_new = True
             c.execute("INSERT INTO users(tg_id,username,name,first_source,invited_by,created_at) "
                       "VALUES(?,?,?,?,?,?)",
                       (m.from_user.id, m.from_user.username or "",
@@ -386,6 +388,7 @@ def upsert_user(m: Message, source, invited_by=None):
         with db() as c:
             c.execute("INSERT OR IGNORE INTO links VALUES(?,?,?)",
                       (invited_by, m.from_user.id, datetime.now(timezone.utc).isoformat()))
+    return is_new
 
 def set_lang(uid, lang):
     with db() as c:
@@ -577,13 +580,24 @@ async def start(m: Message):
                 r = c.execute("SELECT name FROM users WHERE tg_id=?", (invited_by,)).fetchone()
             inviter_name = r["name"] if r else "коллега"
             source = "inv"
-    upsert_user(m, source, invited_by)
+    is_new = upsert_user(m, source, invited_by)
     if ADMIN:
         try:
             await bot.send_message(ADMIN, f"PAEI /start: {escape(m.from_user.full_name)} "
                                           f"(@{m.from_user.username}) · src={payload or 'direct'}")
         except Exception:
             pass
+    # новый холодный лид -> в группу лидов (топов по inv_ не шлём: это чей-то член команды)
+    if is_new and not payload.startswith("inv_") and LEADS_TARGET:
+        try:
+            uname = m.from_user.username
+            handle = f"@{uname}" if uname else "без username"
+            gsrc = payload if payload in ("atlas", "site", "ads") else "direct"
+            await bot.send_message(LEADS_TARGET,
+                f"Новый лид в «Код руководителя»: {escape(m.from_user.full_name)} "
+                f"({handle}) · источник: {gsrc}")
+        except Exception as e:
+            log.error("new lead to group: %s", e)
     if m.from_user.id in ST and ST[m.from_user.id].get("mode") == "quiz":
         st = ST[m.from_user.id]
         lang = st["lang"]
