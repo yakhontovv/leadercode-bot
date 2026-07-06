@@ -202,12 +202,12 @@ TXT = {
         "btn_proxy": "Пройти за члена команды",
         "btn_team": "Карта команды",
         "btn_review": "Получить разбор карты",
-        "btn_channel": "Подпишись: бизнес как актив",
+        "btn_channel": "Подпишись на мой ТГ-канал",
         "review_sent": "Заявка на разбор принята - свяжусь с вами в ближайшее время.",
         "atlas_note": ("Для группы Атласа: соберите карту команды и принесите её на встречу 6 (13 июля). "
                        "Разбор по шагам пришлю вместе с картой."),
         "owner_notif": "В вашу карту добавлен код: <b>{name}</b> - <b>{prof}</b>.\nКарта: /team",
-        "invite_wrapper": "<b>Перешли</b> сообщение ниже своим ключевым людям (3-5 человек):",
+        "invite_wrapper": "<b>Готовое приглашение для твоей команды.</b> Перешли его 3-5 ключевым людям:",
         "invite_fwd": ("Я прошёл «Код руководителя» - за 3 минуты проживаешь один рабочий день и видишь "
                        "свой управленческий код: в чём ты силён и инструкцию, как с тобой работать. "
                        "Пройди и ты, это 3 минуты: {link}"),
@@ -302,12 +302,12 @@ TXT = {
         "btn_proxy": "Take it for a team member",
         "btn_team": "Team map",
         "btn_review": "Get your map reviewed",
-        "btn_channel": "Subscribe: business as an asset",
+        "btn_channel": "Follow my Telegram channel",
         "review_sent": "Request received - I'll be in touch shortly.",
         "atlas_note": ("For the Atlas group: build your team map and bring it to meeting 6 (July 13). "
                        "I'll send the step-by-step review together with the map."),
         "owner_notif": "A code was added to your map: <b>{name}</b> - <b>{prof}</b>.\nMap: /team",
-        "invite_wrapper": "<b>Forward</b> the message below to your key people (3-5):",
+        "invite_wrapper": "<b>Here's a ready invite for your team.</b> Forward it to 3-5 key people:",
         "invite_fwd": ("I just took Leader Code - in 3 minutes you live through one workday and get "
                        "your management code: where you're strong, plus a “working with me” memo. "
                        "Take it too: {link}"),
